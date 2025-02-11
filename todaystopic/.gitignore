@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.swp
+.venv/
+venv/
+env/
+.env
+*.log
+db.sqlite3  # Only if you're using SQLite in development; never in production
+/static/  # If you're collecting static files into a single directory
+/media/   # If you're storing user-uploaded media files in your repo (generally not recommended)
+.pytest_cache/
+.coverage
+htmlcov/
+.cache
+instance/
+.idea/  # PyCharm IDE files
+.vscode/ # VS Code files
+.mypy_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+/local_settings.py  # Sensitive settings; never commit this
+/secrets.py        # Sensitive settings; never commit this
+*.egg
+*.whl
+.ropeproject
+.gitattributes
+.gitmodules
