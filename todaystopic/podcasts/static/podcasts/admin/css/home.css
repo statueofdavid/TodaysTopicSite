@@ -1,0 +1,30 @@
+body {
+    background-image: url("../img/coverart.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color: transparent;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Arrange list items horizontally */
+    justify-content: space-around; /* Distribute space evenly */
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #ffffff; 
+    padding: 5px 10px;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: black;
+}

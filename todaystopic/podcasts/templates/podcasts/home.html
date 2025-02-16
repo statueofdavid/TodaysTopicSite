@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Welcome to My Podcast!</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'podcasts/home.css' %}">
-</head>
-<body>
-   </body>
+	<head>
+		<title>Listen to Us!</title>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'podcasts/admin/css/home.css' %}">
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'podcasts' %}">Podcasts</li>
+				<li>Subscribe</li>
+			</ul>
+		<nav>
+	</body>
 </html>
