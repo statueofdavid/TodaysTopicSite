@@ -12,7 +12,7 @@ I wanted to write the code responsible for:
 1. install python3
 2. install pip3
 3. python -m venv ~/.picknameforvenvdirectory/picknameforvenv
-4. source ~/.picknameforvenvdirectory/picknameforvenv
+4. source ~/.picknameforvenvdirectory/picknameforvenv/activate
 5. pip install -r requirements.txt
 
 ### Of Note ...
