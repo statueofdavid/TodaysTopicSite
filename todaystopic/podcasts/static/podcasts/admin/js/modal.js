@@ -1,5 +1,5 @@
 var btn = document.getElementById("subscribe-link");
-var modal = document.getElementByClassName("modal");
+var modal = document.getElementById("modal-selector");
 var span = document.getElementsByClassName("close-button");
 
 // When the user clicks the button, open the modal 
