@@ -15,8 +15,8 @@
 		</nav>
 		<div class="modal" id="modal-selector">
     			<div class="modal-content">
-        			<span class="close-button">&times;</span> 
-        			<h2>Subscribe to Updates</h2>
+        			<span class="close-button" id="close-button-selector">&times;</span> 
+        			<h2 class="modal-title">Get Updates on Our Drops</h2>
         			<form method="post" action="{% url 'subscribe' %}"> 
             				{% csrf_token %}
             				<input type="email" name="email" placeholder="Your email" required>

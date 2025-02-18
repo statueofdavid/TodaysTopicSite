@@ -2,6 +2,7 @@ body {
     background-image: url("../img/coverart-new.png");
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: #ffffff;
 }
 
 nav {
@@ -43,22 +44,148 @@ nav a:hover {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; 
+    max-width: 500px;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%;
-}   
+    width: 90%;
+    max-width: 500px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-title {
+    text-align: center;
+}
 
 .close-button {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
+}.close-button:hover,.close-button:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content input[type="email"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-content button[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+@keyframes slideUp {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 50%;
+        opacity: 1;
+    }
+}
+
+@media (min-width: 576px) { /* Small devices (landscape phones) */
+   nav a {
+        font-size: 1.4em;
+   }
+    
+  .modal-content {
+        width: 80%;
+        height: 30%;
+        animation: slideUp 0.3s ease-in-out;
+    }
+}
+
+@media (min-width: 468px) { /* Medium devices (tablets) */
+   nav a {
+        font-size: 1.6em;
+   }
+    
+  .modal-content {
+        width: 100%;
+        height: 15%;
+        margin: 10% auto;
+        animation: slideUp 0.3s ease-in-out;
+    }
+}
+
+@media (min-width: 855px) { /* Specifics */
+   nav a {
+        font-size: 1.4em;
+   }
+    
+  .modal-content {
+        width: 70%;
+        height: 25%;
+        margin: 10% auto;
+        animation: slideUp 0.3s ease-in-out;
+    }
+}
+
+@media (min-width: 992px) { /* Large devices (desktops) */
+   nav a {
+        font-size: 1.4em;
+   }
+    
+    .modal-content {
+        width: 60%;
+        height: 30%;
+        margin: 15% auto;
+    }
+}
+
+@media (min-width: 1100px) { /* Extra large devices (large desktops) */
+       nav a {
+        font-size: 1.4em;
+   }
+    
+  .modal-content {
+        width: 100%;
+        height: 30%;
+    }
+}
+
+@media (min-width: 1200px) { /* Extra large devices (large desktops) */
+       nav a {
+        font-size: 1.4em;
+   }
+    
+  .modal-content {
+        width: 50%;
+        height: 30%;
+    }
 }
