@@ -5,8 +5,16 @@ from django.utils.text import slugify
 import uuid
 import os
 
+class Subscriber(models.Model):
+    email = models.EmailField(blank=False, null=False, unique=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    def __str__(self):
+        return self.email
+
 class PodcastChannel(models.Model):
     title = models.CharField(max_length=255, blank=False, null=False, help_text="Title of the podcast channel")
+    pub_date = models.DateTimeField(default=timezone.now, help_text="Date and time the episode was published")
     description = models.TextField(blank=False, null=False, help_text="Description of the podcast channel")
     link = models.URLField(blank=False, null=False, help_text="Link to sit of the podcast channel")
     managing_editor = models.EmailField(blank=False, null=False, help_text="Managing editor email")
@@ -15,10 +23,10 @@ class PodcastChannel(models.Model):
     author = models.CharField(max_length=255, blank=False, null=False, help_text="author name")
     owner_name = models.CharField(max_length=255, blank=False, null=False, help_text="owner name")
     owner_email = models.EmailField(blank=False, null=False, help_text="owner email")
-    category = models.CharField(max_length=255, blank=False, null=False, help_text="iTunes category")
+    category = models.CharField(max_length=255, blank=False, null=False, help_text="use categories that itunes likes")
     
     artwork = models.ImageField(
-        upload_to=lambda instance, filename: media_directory_path(instance,filename, 'channel_image'), 
+        upload_to='channel_artwork', 
         blank=False, 
         null=False, 
         help_text="add artwork"
@@ -28,6 +36,7 @@ class PodcastChannel(models.Model):
         return self.title
 
 class PodcastEpisode(models.Model):
+    channel = models.ForeignKey(PodcastChannel, on_delete=models.CASCADE, related_name='episodes')
     title = models.CharField(max_length=255, blank=False, null=False, help_text="Title of the podcast episode")
     description = models.TextField(blank=False, null=False, help_text="Detailed description of the episode")
     link = models.URLField(blank=False, null=False, help_text="Link to site of podcast")
@@ -39,17 +48,17 @@ class PodcastEpisode(models.Model):
     file_type = models.CharField(max_length=50, default="audio/mpeg", help_text="Content type of the audio file")
     
     file = models.FileField(
-        upload_to=lambda instance, filename: media_directory_path(instance, filename, 'episode_audio'),
+        upload_to='episodes_audio/',
         blank=False,
         null=False,
-        help_text="URL of the audio file"
+        help_text="add audio"
     )
     
     artwork = models.ImageField(
-        upload_to=lambda instance, filename: media_directory_path(instance, filename, 'episode_image'),
+        upload_to='episode_artwork/',
         blank=False,
         null=False,
-        help_text="Episode artwork"
+        help_text="add artwork"
     )
 
     def __str__(self):
@@ -67,12 +76,3 @@ class PodcastEpisode(models.Model):
             except Exception as e:
                 print(f"Error getting file size: {e}")
         super().save(*args, **kwargs)
-
-def podcast_episode_directory_path(instance, filenamei, usage):
-    if usage == 'channel_image':
-        return f'{slugify(instance.title)}/artwork/{filename}'
-    elif usage == 'episode_image':
-        return f'{slugify(instance.channel.title)}/{slugify(instance.title)}/artwork/{filename}'
-    elif usage == 'episode_audio':
-        return f'{slugify(instance.channel.title)}/{slugify(instance.title)}/audio/{filename}'
-

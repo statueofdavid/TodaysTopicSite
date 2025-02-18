@@ -6,24 +6,26 @@
 <body>
     <h1>Episodes</h1>
 
-    {% if podcasts %}
+    {% if channels %}
         <ul>
-            {% for podcast in podcasts %}
+            {% for channel in channels %}
+	    	{% for episode in channel.episodes.all %}
                 <li>
-                    <h2>{{ podcast.title }}</h2>
-                    <p>{{ podcast.description }}</p>
-                    <p>Published: {{ podcast.pub_date }}</p>
+                    <h2>{{ episode.title }}</h2>
+                    <p>{{ episode.description }}</p>
+                    <p>Published: {{ episode.pub_date }}</p>
 
-                    {% if podcast.enclosure_url %}  <audio controls>
-                            <source src="{{ podcast.enclosure_url }}" type="{{ podcast.enclosure_type }}">
+                    {% if episode.file %}  <audio controls>
+                            <source src="{{ episode.file }}" type="{{ episode.file_type }}">
                             Your browser does not support the audio element.
                         </audio>
                     {% endif %}
-                    {% if podcast.image %}
-                        <img src="{{ podcast.image.url }}" alt="{{ podcast.title }} artwork" width="200">
+                    {% if episode.artwork %}
+                        <img src="{{ episode.artwork }}" alt="{{ episode.title }} artwork" width="200">
                     {% endif %}
                 </li>
             {% endfor %}
+	    {% endfor %}
         </ul>
     {% else %}
         <p>No podcasts available yet.</p>
