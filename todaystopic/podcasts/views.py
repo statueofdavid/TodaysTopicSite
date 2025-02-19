@@ -6,6 +6,13 @@ from django.shortcuts import render, redirect
 
 from.models import PodcastChannel, PodcastEpisode, Subscriber
 
+def home(request):
+    return render(request, 'podcasts/home.html')
+
+def podcast_page(request):
+    channels = PodcastChannel.objects.all().order_by('-pub_date')  # Get all podcasts, ordered by most recent
+    return render(request, 'podcasts/podcasts.html', {'channels': channels})
+
 def subscribe(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -20,10 +27,3 @@ def subscribe(request):
             return render(request, 'subscription_error.html', {'error': 'Invalid email address.'})
     else:
         return redirect('home')
-
-def podcast_page(request):
-    channels = PodcastChannel.objects.all().order_by('-pub_date')  # Get all podcasts, ordered by most recent
-    return render(request, 'podcasts/podcasts.html', {'channels': channels})
-
-def home(request):
-    return render(request, 'podcasts/home.html')
