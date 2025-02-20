@@ -1,7 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
 
-from.models import Podcast
+from.models import PodcastChannel, PodcastEpisode, Subscriber
 
 class PodcastFeed(Feed):
     title = "Today's Topic"  # Replace with your podcast title
