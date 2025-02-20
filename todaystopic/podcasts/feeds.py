@@ -11,55 +11,15 @@ class PodcastFeed(Feed):
     d_conclusion = "Subscribe now and find out what."
     description = f"{d_intro} {d_tag} {d_conclusion}"
 
-    def items(self):
-        return Podcast.objects.order_by('-pub_date')
-
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return item.description
-
-    def item_link(self, item):
-        # Absolute URL for episode if available, else relative URL
-        if item.link:
-            return item.link
-        else:
-            return f"/episode/{item.id}"  # Example relative URL
-
-    def item_pubdate(self, item):
-        return item.pub_date
-
-    def item_enclosure_url(self, item):
-        return item.enclosure_url
-
-    def item_enclosure_length(self, item):
-        return item.enclosure_length
-
-    def item_enclosure_mime_type(self, item):
-        return item.enclosure_type
-
-    def item_guid(self, item):
-        return item.guid
-
-    def item_itunes_duration(self, item):
-        return item.duration
-
-    def item_image(self, item):
-        if item.image:
-            return item.image.url
-        return None
-
-    # Channel-level data (using property to avoid repeated queries):
     @property
-    def podcast_data(self):
+    def podcastChannel(self):
         try:
-            return Podcast.objects.all().first()  # Get the first podcast for channel info
-        except Podcast.DoesNotExist:
+            return PodcastChannel.objects.all().first()  # Get the first podcast for channel info
+        except PodcastChannel.DoesNotExist:
             return None
 
-    def title(self): # Overriding the basic title
-        podcast = self.podcast_data
+    def title(self):
+        podcast = self.podcastChannel
         return podcast.podcast_title if podcast else "Your Podcast Title"
 
     def description(self): # Overriding the basic description
