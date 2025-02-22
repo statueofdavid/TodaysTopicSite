@@ -23,10 +23,10 @@ class PodcastFeed(Feed):
             return None
             
     def domain(self, obj):
-        return Site.objects.get_current().domain
+        return 'declared.space'
     
     def items(self, obj):
-        episodes = PodcastEpisode.objects.filter(channel=obj).order_by('-pub_date')
+        episodes = PodcastEpisode.objects.all().order_by('-pub_date')
         
         if episodes:
             return episodes
@@ -48,7 +48,7 @@ class PodcastFeed(Feed):
 
     def link(self): # Overriding the basic link
         podcast = self.podcastChannel
-        return podcast.podcast_link if podcast else "/podcast.rss"
+        return podcast.podcast_link if podcast else "/rss"
 
     def managing_editor(self):
         podcast = self.podcastChanel
@@ -91,6 +91,11 @@ class PodcastFeed(Feed):
             return item.channel.author
         except PodcastEpisode.channel.RelatedObjectDoesNotExist:
             return None
+
+    def item_enclosure_url(self, item):
+        if item.file and item.file.url:
+            return self.request.build_absolute_uri(item.file.url)
+        return None
 
     def item_link(self, item):
         try:
