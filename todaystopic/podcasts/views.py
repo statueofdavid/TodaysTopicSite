@@ -9,6 +9,12 @@ from.models import PodcastChannel, PodcastEpisode, Subscriber
 def home(request):
     return render(request, 'podcasts/home.html')
 
+def privacy(request):
+    return render(request, 'podcasts/privacy.html')
+
+def terms(request):
+    return render(request, 'podcasts/terms.html')
+
 def podcast_page(request):
     channels = PodcastChannel.objects.all().order_by('-pub_date')  # Get all podcasts, ordered by most recent
     return render(request, 'podcasts/podcasts.html', {'channels': channels})

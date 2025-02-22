@@ -1,0 +1,7 @@
+    {% extends 'podcasts/base.html' %}
+
+{% block title %}Privacy{% endblock %}
+
+{% block content %}
+
+{% endblock %}

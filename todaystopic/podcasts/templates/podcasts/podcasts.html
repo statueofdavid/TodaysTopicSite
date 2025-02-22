@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Podcast Page</title>
-</head>
-<body>
-    <h1>Episodes</h1>
+    {% extends 'podcasts/base.html' %}
 
-    {% if channels %}
+{% block title %}Podcast Episodes{% endblock %}
+
+{% block content %}
+    {% if episodes %}
         <ul>
-            {% for channel in channels %}
-	    	{% for episode in channel.episodes.all %}
+            {% for episode in episodes %}
                 <li>
                     <h2>{{ episode.title }}</h2>
                     <p>{{ episode.description }}</p>
                     <p>Published: {{ episode.pub_date }}</p>
 
-                    {% if episode.file %}  <audio controls>
-                            <source src="{{ episode.file }}" type="{{ episode.file_type }}">
+                    {% if episode.file %}
+                        <audio controls>
+                            <source src="{{ episode.file.url }}" type="{{ episode.file_type }}"> 
                             Your browser does not support the audio element.
                         </audio>
                     {% endif %}
+
                     {% if episode.artwork %}
-                        <img src="{{ episode.artwork }}" alt="{{ episode.title }} artwork" width="200">
+                        <img src="{{ episode.artwork.url }}" alt="{{ episode.title }} artwork" width="200"> 
                     {% endif %}
                 </li>
             {% endfor %}
-	    {% endfor %}
         </ul>
     {% else %}
         <p>No podcasts available yet.</p>
     {% endif %}
-
-</body>
-</html>
+{% endblock %}

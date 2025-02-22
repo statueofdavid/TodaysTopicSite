@@ -5,7 +5,6 @@ from django.utils.feedgenerator import *
 from django.utils import timezone
 from django.urls import reverse
 
-
 from.models import PodcastChannel, PodcastEpisode, Subscriber
 
 class PodcastFeed(Feed):
@@ -19,9 +18,12 @@ class PodcastFeed(Feed):
     @property
     def podcastChannel(self):
         try:
-            return PodcastChannel.objects.all().first()  # Get the first podcast for channel info
+            return PodcastChannel.objects.all().first()
         except PodcastChannel.DoesNotExist:
             return None
+            
+    def domain(self, obj):
+        return Site.objects.get_current().domain
     
     def items(self, obj):
         episodes = PodcastEpisode.objects.filter(channel=obj).order_by('-pub_date')
@@ -84,11 +86,14 @@ class PodcastFeed(Feed):
         podcast = self.podcastChannel
         return podcast.itunes_category if podcast else None
 
-    def item_link(self, item):
-        return reverse('podcast_episode_detail', args=[item.channel.id, item.id])
-
     def item_author_name(self, item):
         try:
             return item.channel.author
         except PodcastEpisode.channel.RelatedObjectDoesNotExist:
-            return None  # Or a default value
+            return None
+
+    def item_link(self, item):
+        try:
+            return reverse('podcast_episode_detail', args=[item.channel.id, item.id])
+        except PodcastEpisode.channel.RelatedObjectDoesNotExist:
+            return None

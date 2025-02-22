@@ -11,9 +11,14 @@ I wanted to write the code responsible for:
 ### Basic Steps
 1. install python3
 2. install pip3
-3. python -m venv ~/.picknameforvenvdirectory/picknameforvenv
-4. source ~/.picknameforvenvdirectory/picknameforvenv/activate
+3. python -m venv ~/.venv/dev
+4. source ~/.venv/dev/bin/activate
 5. pip install -r requirements.txt
 
 ### Of Note ...
 - This project is using pip-tools and pipreqs to generate the requirements.txt
+
+## Usage
+1. cd todaysTopic/
+2. python3 manager.py runserver
+3. open a browser and goto `localhost:8000`
