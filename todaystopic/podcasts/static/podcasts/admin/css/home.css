@@ -1,11 +1,13 @@
 body {
-    background-image: url("../img/coverart-new.png");
-    background-size: cover;
+    background-image: url("../img/coverart.jpeg");
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
-    background-color: #ffffff;
+    background-color: #000000;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    overflow: hidden;
 }.main-content {  /* Wrap the main content and modal */
     flex: 1;     /* Allow the main content to grow */
 }
@@ -26,6 +28,7 @@ nav ul {
 nav a {
     margin: 0 10px;
     text-decoration: none;
+    text-size: 48px;
     color: #ffffff; 
     padding: 5px 10px;
 }
@@ -147,60 +150,28 @@ footer li {
     }
 }
 
-@media (min-width: 576px) { /* Small devices (landscape phones) */
-   nav a {
-        font-size: 1.4em;
-   }
-    
-  .modal-content {
-        width: 80%;
-        height: 60%;
-        animation: slideUp 0.3s ease-in-out;
-    }
+@media (min-width: 300px) {/* mobile devices */
+   nav a {font-size: 82px;}
 }
-
-@media (min-width: 468px) { /* Medium devices (tablets) */
-   nav a {
-        font-size: 1.6em;
-   }
-    
-  .modal-content {
-        width: 100%;
-        height: 45%;
-        margin: 10% auto;
-        animation: slideUp 0.3s ease-in-out;
-    }
+@media (min-width: 500px) {/* mobile devices */
+   nav a {font-size: 72px;}
 }
-
-@media (min-width: 855px) { /* Specifics */
-   nav a {
-        font-size: 1.4em;
-   }
-    
-  .modal-content {
-        width: 70%;
-        height: 45%;
-        margin: 10% auto;
-        animation: slideUp 0.3s ease-in-out;
-    }
+@media (min-width: 700px) {/* mobile devices */
+   nav a {font-size: 56px;}
 }
 
 @media (min-width: 992px) { /* Large devices (desktops) */
-   nav a {
-        font-size: 1.4em;
-   }
+   nav a { font-size: 2em; }
     
     .modal-content {
         width: 60%;
-        height: 40%;
+        height: 25%;
         margin: 15% auto;
     }
 }
 
 @media (min-width: 1100px) { /* Extra large devices (large desktops) */
-       nav a {
-        font-size: 1.4em;
-   }
+  nav a { font-size: 2em; }
     
   .modal-content {
         width: 100%;
@@ -209,9 +180,7 @@ footer li {
 }
 
 @media (min-width: 1200px) { /* Extra large devices (large desktops) */
-       nav a {
-        font-size: 1.4em;
-   }
+   nav a { font-size: 2em; }
     
   .modal-content {
         width: 50%;
