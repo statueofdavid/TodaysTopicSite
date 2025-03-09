@@ -6,39 +6,44 @@
 	<link rel="stylesheet" href="{% static 'podcasts/admin/css/base.css' %}">
 </head>
 <body>
-    <nav>
+    <div class="nav-wrapper">
+      <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'podcasts' %}">Podcasts</a></li>
-            <li><a href="#" id="subscribe-link">Subscribe</a></li> 
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'podcasts' %}">Podcasts</a></li>
+          <li><a href="#" id="subscribe-link">Subscribe</a></li> 
         </ul>
-    </nav>
+      </nav>
+    </div>
 
-    {% block content %}{% endblock %} 
+    <div class="main-content">
+      {% block content %}{% endblock %} 
+      <div class="modal" id="modal-selector">
+        <div class="modal-content">
+          <span class="close-button" id="close-button-selector">&times;</span> 
+          <h1 class="modal-title">You Know You Want It</h1>
+          <h3 class="modal-title">An Email When We Drop New Episodes</h3>
+          <form method="post" action="{% url 'subscribe' %}"> 
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-    
-		<div class="modal" id="modal-selector">
-    			<div class="modal-content">
-        			<span class="close-button" id="close-button-selector">&times;</span> 
-        			<h1 class="modal-title">You Know You Want It</h1>
-                    <h3 class="modal-title">An Email When We Drop New Episodes</h3>
-        			<form method="post" action="{% url 'subscribe' %}"> 
-            				{% csrf_token %}
-            				<input type="email" name="email" placeholder="Your email" required>
-            				<button type="submit">Subscribe</button>
-        			</form>
-    			</div>
-		</div>
-		<script src="{% static 'podcasts/admin/js/modal.js' %}"></script>
-
-    <footer>
-    <div class="container"> 
-        <ul>
+    <script src="{% static 'podcasts/admin/js/modal.js' %}"></script>
+  
+    <div class="footer-wrapper">
+      <footer>
+        <div class="container"> 
+          <ul>
             <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
             <li><a href="{% url 'terms' %}">Terms of Service</a></li>
-        </ul>
+          </ul>
+        </div>
+      </footer>
     </div>
-</footer>
 
 </body>
 </html>
